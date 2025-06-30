@@ -1,0 +1,25 @@
+#keyboard {display: flex; flex-direction: column; gap: 6px;}
+.row { display: flex; gap: 4px;  justify-content: center;}
+
+.key {
+    background: #ccc;
+    border: 1px solid #888;
+    border-radius: 6px;
+    padding: 12px 10px;
+    user-select: none;
+    font: 14px/1 sans-serif;
+    min-width: 42px;
+    text-align: center;
+}
+
+/* .row {
+    display: flex;
+    margin: auto;
+    justify-content: center;
+    align-items: center;
+    padding: 2px;
+}
+*/
+.key.pressed {
+    background: #16a34a;
+}
