@@ -1,4 +1,36 @@
-import {mainBlock, rightBlock } from "./layout.js";
+import {mainBlock, rightBlock, mainBlockMac, rightBlockMac} from "./layout.js";
+
+
+// function macLayout() {
+//     document.getElementById("main-block").innerHTML = ""
+//     document.getElementById("num-pad").innerHTML = ""
+//     renderBlock(mainBlockMac, "main-block")
+//     renderBlock(rightBlockMac, "num-pad")
+
+// }
+
+// function windowLayout() {
+//     document.getElementById("main-block").innerHTML = ""
+//     document.getElementById("num-pad").innerHTML = ""
+//     renderBlock(mainBlock, "main-block")
+//     renderBlock(rightBlock, "num-pad")
+// }
+
+document.getElementById("mac-layout").addEventListener("click", () => {
+    document.getElementById("main-block").innerHTML = ""
+    document.getElementById("num-pad").innerHTML = ""
+    renderBlock(mainBlockMac, "main-block")
+    renderBlock(rightBlockMac, "num-pad")
+})
+
+document.getElementById("nor-layout").addEventListener("click", () => {
+    document.getElementById("main-block").innerHTML = ""
+    document.getElementById("num-pad").innerHTML = ""
+    renderBlock(mainBlock, "main-block")
+    renderBlock(rightBlock, "num-pad")
+})
+
+
 
 function renderBlock(layout, containerId) {
     const container = document.getElementById(containerId);
@@ -27,12 +59,17 @@ function renderBlock(layout, containerId) {
 })
 }
 
-renderBlock(mainBlock, "main-block")
-renderBlock(rightBlock, "num-pad")
+// renderBlock(mainBlock, "main-block")
+// renderBlock(rightBlock, "num-pad")
 
 window.addEventListener('keydown', (e) => {
     e.preventDefault()
-    const el = document.querySelector(`.key[data-code="${e.code}"]`)
+    
+    let code = e.code
+    if(e.key === 'Meta' || e.key === 'OS') {
+        code = e.code === 'MetaLeft' ? 'MetaLeft' : 'MetaRight'
+    }
+    const el = document.querySelector(`.key[data-code="${code}"]`)
     if(el) el.classList.add('pressed')
 })
 
@@ -71,3 +108,11 @@ function prettify(code) {
     .replace("Subtract", "-")
     .replace("Add", "+"); 
 }
+
+function onLoad() {
+    document.getElementById("main-block").innerHTML = ""
+    document.getElementById("num-pad").innerHTML = ""
+    renderBlock(mainBlock, "main-block")
+    renderBlock(rightBlock, "num-pad")
+}
+onLoad()
