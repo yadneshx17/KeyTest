@@ -1,3 +1,7 @@
+.samples
+./samples
+samples
+
 ./trial
 /trial
 trial
@@ -13,3 +17,6 @@ keyMapping.txt
 ./keyMapping
 /keyMapping
 keyMapping
+
+trial*
+./trial_css.txt

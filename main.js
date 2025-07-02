@@ -16,20 +16,22 @@ import {mainBlock, rightBlock, mainBlockMac, rightBlockMac} from "./layout.js";
 //     renderBlock(rightBlock, "num-pad")
 // }
 
-document.getElementById("mac-layout").addEventListener("click", () => {
-    document.getElementById("main-block").innerHTML = ""
-    document.getElementById("num-pad").innerHTML = ""
-    renderBlock(mainBlockMac, "main-block")
-    renderBlock(rightBlockMac, "num-pad")
-})
-
 document.getElementById("nor-layout").addEventListener("click", () => {
     document.getElementById("main-block").innerHTML = ""
     document.getElementById("num-pad").innerHTML = ""
     renderBlock(mainBlock, "main-block")
     renderBlock(rightBlock, "num-pad")
+    document.body.dataset.layout = "win";
 })
 
+document.getElementById("mac-layout").addEventListener("click", () => {
+    document.getElementById("main-block").innerHTML = ""
+    document.getElementById("num-pad").innerHTML = ""
+    renderBlock(mainBlockMac, "main-block")
+    renderBlock(rightBlockMac, "num-pad")
+    document.body.dataset.layout = "mac";
+
+})
 
 
 function renderBlock(layout, containerId) {
@@ -40,8 +42,19 @@ function renderBlock(layout, containerId) {
     rowDiv.classList.add('row')
 
     rowCodes.forEach(code => {
-        // Create one <div class="key"> per key
 
+        // if(code === 'NumpadEnter') {
+        //     const keyDiv  = document.createElement('div');
+        //     keyDiv.classList.add('key');
+        //     keyDiv.dataset.code = code
+        //     keyDiv.textContent = prettify(code);
+        //     rowDiv.appendChild(keyDiv)
+        //     return
+        // }
+
+
+
+        // Create one <div class="key"> per key
         const keyDiv  = document.createElement('div');
         keyDiv.classList.add('key');
 
@@ -64,11 +77,16 @@ function renderBlock(layout, containerId) {
 
 window.addEventListener('keydown', (e) => {
     e.preventDefault()
-    
     let code = e.code
+
     if(e.key === 'Meta' || e.key === 'OS') {
         code = e.code === 'MetaLeft' ? 'MetaLeft' : 'MetaRight'
     }
+    // if ( e.key == 'Escape') {
+    //     const el = document.querySelector(`.key[data-code="${code}"]`)
+    //     if(el) el.classList.add('pressed')
+    // }
+
     const el = document.querySelector(`.key[data-code="${code}"]`)
     if(el) el.classList.add('pressed')
 })
@@ -94,8 +112,6 @@ function prettify(code) {
     };
     if (map[code]) return map[code];
     
-    
-
     return code
     .replace(/^Key/, "")
     .replace(/^Digit/, "")
