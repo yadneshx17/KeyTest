@@ -168,5 +168,5 @@ body[data-layout="mac"] .key[data-code="F12"] { min-width: 64px;}
 #layout-buttons button:hover,
 #layout-buttons button:focus-visible {
   transform: scale(1.08);
-  box-shadow: 0 0 12px #19191aaa;      /* soft purple glow */
+  box-shadow: 0 0 12px #19191aaa;
 }
